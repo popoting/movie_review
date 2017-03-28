@@ -36,6 +36,7 @@ class MoviesController < ApplicationController
 
     respond_to do |format|
       if @movie.save
+        current_user.join!(@movie)
         format.html { redirect_to @movie, notice: 'Movie was successfully created.' }
         format.json { render :show, status: :created, location: @movie }
       else

@@ -43,7 +43,9 @@
              <%= link_to("添加收藏", join_movie_path(@movie), method: :post, class: "btn btn-default") %>
             <% end %>
          </span>
+         <% if current_user && current_user.is_member_of?(@movie) %>
         <%= link_to "Write Review", new_movie_review_path(@movie), class: "btn btn-danger" %>
+        <% end %>
         </div>
         <h1 class="review_title"><%= @movie.title %></h1>
         <p><%= @movie.description %></p>
@@ -60,10 +62,11 @@
       </div>
     </div>
   </div>
+<% if current_user && current_user == @movie.user %>
 
 <%= link_to 'Edit', edit_movie_path(@movie) %> |
 <%= link_to 'Back', movies_path %>
-
+<% end %>
 <script>
     $('.star-rating').raty({
       path: '/assets/',
