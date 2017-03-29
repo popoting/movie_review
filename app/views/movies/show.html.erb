@@ -62,11 +62,14 @@
       </div>
     </div>
   </div>
+<div class="button-show">
 <% if current_user && current_user == @movie.user %>
 
-<%= link_to 'Edit', edit_movie_path(@movie) %> |
-<%= link_to 'Back', movies_path %>
+<%= link_to 'Edit', edit_movie_path(@movie), class: "btn btn-info" %>
+<%= link_to 'Back', movies_path, class: "btn btn-info" %>
 <% end %>
+</div>
+
 <script>
     $('.star-rating').raty({
       path: '/assets/',

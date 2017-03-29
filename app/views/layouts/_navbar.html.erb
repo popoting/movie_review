@@ -11,25 +11,32 @@
     </div>
 
     <!-- Collect the nav links,forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <% if user_signed_in? %>
-        <li><%= link_to "New Movie", new_movie_path, class: "active" %></li>
-        <li class="sign-out"><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
-
-      </ul>
-
-        <% else %>
-        <li><%= link_to "Sign Up", new_user_registration_path, class: "active" %></li>
-        <li><%= link_to "Sign In", new_user_session_path, class: "active" %></li>
-        <% end %>
-      </ul>
-      <%= form_tag search_movies_path, method: :get, class: "navbar-form navbar-right", role: "search" do %>
+    <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+      <%= form_tag search_movies_path, method: :get, class: "navbar-form pull-left", role: "search" do %>
         <p>
           <%= text_field_tag :search, params[:search], class: "form-control" %>
           <%= submit_tag "Search", name: nil, class: "btn btn-default" %>
         </p>
       <% end %>
+      <ul class="nav navbar-nav pull-right">
+        <% if user_signed_in? %>
+        <li><%= link_to "New Movie", new_movie_path, class: "active" %></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            Hi, <%=current_user.email %>
+            <b class="caret"></b>
+            <ul class="dropdown-menu">
+              <li><%= link_to("My Favorites Movies", account_favorites_path) %></li>
+              <li><%= link_to("My Reviews", account_reviews_path) %></li>
+              <li class="divider"></li>
+              <li class="sign-out"><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+            </ul>
+          <% else %>
+        <li><%= link_to "Sign Up", new_user_registration_path, class: "active" %></li>
+        <li><%= link_to "Sign In", new_user_session_path, class: "active" %></li>
+        <% end %>
+      </ul>
+
     </div>
   </div>
 </nav>
